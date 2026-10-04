@@ -118,7 +118,7 @@ export default function Dashboard() {
         <div className="page-head dashboard-hero">
           <div className="hero-copy">
             <span className="eyebrow"><span className="live-dot" /> LIVE ECOSYSTEM PULSE</span>
-            <h1>Signals from the <span>tech frontier.</span></h1>
+            <h1>Signals from the<span>tech frontier.</span></h1>
             <p className="hero-description">
               Discover the tools, ideas, and repositories developers are talking about right now.
             </p>

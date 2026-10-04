@@ -2270,13 +2270,22 @@ html[data-theme="positivus"] .dashboard-top-grid .dashboard-hero {
   padding: clamp(1.5rem, 4vw, 3rem);
   background: #f3f3f3;
 }
-html[data-theme="positivus"] .dashboard-hero h1 { max-width: 540px; color: #191a23; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.12; }
+html[data-theme="positivus"] .dashboard-hero h1 { max-width: 540px; color: #191a23; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.08; }
 html[data-theme="positivus"] .dashboard-hero h1 span {
-  display: inline-block;
-  margin-left: -0.08em;
+  position: relative;
+  display: block;
+  isolation: isolate;
+  width: fit-content;
+  margin-top: 0.12em;
   padding: 0 0.08em;
-  background: #b9ff66;
   color: #191a23;
+}
+html[data-theme="positivus"] .dashboard-hero h1 span::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0.14em 0 0.02em;
+  background: #b9ff66;
+  content: "";
 }
 html[data-theme="positivus"] .dashboard-hero .hero-description { max-width: 440px; color: #595a63; }
 html[data-theme="positivus"] .hero-stat {
