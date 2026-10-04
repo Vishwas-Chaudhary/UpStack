@@ -36,13 +36,13 @@ export default function Layout() {
             <NavLink to="/notes">Notes</NavLink>
           </nav>
           <div className="topbar-right workspace-actions">
-            <HelpChat />
             <button className="btn btn-outline" onClick={() => setPaletteOpen(true)}>
               Search <kbd>Ctrl K</kbd>
             </button>
             <Link to="/account" className="workspace-user" aria-label={`${user.name}, account settings`}>
               <span className="avatar">{user.name.charAt(0).toUpperCase()}</span>
             </Link>
+            <HelpChat className="topbar-help-chat" />
           </div>
         </div>
       </header>

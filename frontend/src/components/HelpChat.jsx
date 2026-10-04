@@ -72,8 +72,8 @@ export default function HelpChat({ className = "" }) {
         </section>
       )}
       <button className="chat-launcher" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
-        {open ? "Close help" : "Ask Pino"}
-        <span aria-hidden="true">{open ? "×" : "?"}</span>
+        {open ? "Close help" : "Ask Pino?"}
+        {open && <span aria-hidden="true">×</span>}
       </button>
     </div>
   );
