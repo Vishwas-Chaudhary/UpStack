@@ -2,6 +2,7 @@ services:
   - type: web
     name: upstack-api
     runtime: ruby
+    plan: free
     rootDir: backend
     buildCommand: bundle install
     startCommand: bundle exec rails db:migrate && bundle exec puma -p $PORT
