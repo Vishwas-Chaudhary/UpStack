@@ -143,88 +143,93 @@ export default function Dashboard() {
         </section>
       </div>
 
-      <div className="chips filters" role="tablist" aria-label="Ecosystem">
-        {CATEGORIES.map((c) => (
-          <button key={c} className={`pill ${category === c ? "active" : ""}`} onClick={() => setCategory(c)}>
-            {c}
-          </button>
-        ))}
+      <div className="dashboard-filter-row">
+        <div className="chips filters" role="tablist" aria-label="Ecosystem">
+          {CATEGORIES.map((c) => (
+            <button key={c} className={`pill ${category === c ? "active" : ""}`} onClick={() => setCategory(c)}>
+              {c}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="dashboard-feature-layout">
-        <section className="spotlight-section">
-          <div className="section-head spotlight-heading">
-            <div>
-              <span className="eyebrow">WHAT DEVELOPERS ARE EXPLORING</span>
-              <h2>Technology spotlight</h2>
-            </div>
-            <span className="muted">Current cross-source score</span>
-          </div>
-          {featured.length === 0 ? (
-            <div className="spotlight-empty">
-              <p className="muted">
-                No {category === "All" ? "" : `${category} `}signals are in the current feed yet. Technology spotlights appear when matching items are found.
-              </p>
-              {CATEGORY_RESEARCH_SUGGESTIONS[category] && (
-                <div className="spotlight-suggestions" aria-label={`Research ${category} technologies`}>
-                  {CATEGORY_RESEARCH_SUGGESTIONS[category].map((technology) => (
+            <section className="spotlight-section">
+              <div className="section-head spotlight-heading">
+                <div>
+                  <span className="eyebrow">WHAT DEVELOPERS ARE EXPLORING</span>
+                  <h2>Technology spotlight</h2>
+                </div>
+                <span className="muted">Current cross-source score</span>
+              </div>
+              {featured.length === 0 ? (
+                <div className="spotlight-empty">
+                  <p className="muted">
+                    No {category === "All" ? "" : `${category} `}signals are in the current feed yet. Technology spotlights appear when matching items are found.
+                  </p>
+                  {CATEGORY_RESEARCH_SUGGESTIONS[category] && (
+                    <div className="spotlight-suggestions" aria-label={`Research ${category} technologies`}>
+                      {CATEGORY_RESEARCH_SUGGESTIONS[category].map((technology) => (
+                        <Link
+                          key={technology}
+                          className="pill"
+                          to={`/research?q=${encodeURIComponent(technology)}`}
+                        >
+                          Research {technology}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="spotlight-grid">
+                  {featured.map((technology, index) => (
                     <Link
-                      key={technology}
-                      className="pill"
-                      to={`/research?q=${encodeURIComponent(technology)}`}
+                      key={technology.name}
+                      to={`/technology/${encodeURIComponent(technology.name)}`}
+                      className={`card spotlight-card spotlight-rank-${index + 1}`}
                     >
-                      Research {technology}
+                      <span className="spotlight-rank">0{index + 1} / TRENDING</span>
+                      <span className="spotlight-icon" aria-hidden="true">{CATEGORY_MARKS[technology.category] || "API"}</span>
+                      <strong>{technology.name}</strong>
+                      <span className="spotlight-category">{technology.category || "Emerging technology"}</span>
+                      <span className="spotlight-score">{Math.round(technology.score)}<small> momentum</small></span>
+                      <span className="spotlight-foot">{technology.source_count} sources · {technology.item_count} signals</span>
                     </Link>
                   ))}
                 </div>
               )}
+            </section>
+
+        <aside className="dashboard-side-column">
+          <section className="card panel digest-panel">
+            <div className="section-head tight">
+              <div>
+                <span className="eyebrow">YOUR DAILY BRIEFING</span>
+                <h2>Today’s highlights</h2>
+              </div>
+              <span className="digest-date">{new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
             </div>
-          ) : (
-            <div className="spotlight-grid">
-              {featured.map((technology, index) => (
-                <Link
-                  key={technology.name}
-                  to={`/technology/${encodeURIComponent(technology.name)}`}
-                  className={`card spotlight-card spotlight-rank-${index + 1}`}
-                >
-                  <span className="spotlight-rank">0{index + 1} / TRENDING</span>
-                  <span className="spotlight-icon" aria-hidden="true">{CATEGORY_MARKS[technology.category] || "API"}</span>
-                  <strong>{technology.name}</strong>
-                  <span className="spotlight-category">{technology.category || "Emerging technology"}</span>
-                  <span className="spotlight-score">{Math.round(technology.score)}<small> momentum</small></span>
-                  <span className="spotlight-foot">{technology.source_count} sources · {technology.item_count} signals</span>
+            <div className="digest-techs">
+              {(digest?.technologies || []).slice(0, 4).map((technology) => (
+                <Link key={technology.name} to={`/technology/${encodeURIComponent(technology.name)}`}>
+                  <span>{technology.name}</span><strong>{Math.round(technology.score)}</strong>
                 </Link>
               ))}
             </div>
-          )}
-        </section>
-
-        <section className="card panel digest-panel">
-          <div className="section-head tight">
-            <div>
-              <span className="eyebrow">YOUR DAILY BRIEFING</span>
-              <h2>Today’s highlights</h2>
+            <div className="digest-stories">
+              {(digest?.stories || []).slice(0, 3).map((item) => (
+                <a key={item.url} href={item.url} target="_blank" rel="noreferrer" className="digest-story">
+                  <span className="badge">{item.source}</span>
+                  <strong>{item.title}</strong>
+                  <span className="muted">{Math.round(item.score)} ecosystem points</span>
+                </a>
+              ))}
+              {digest && digest.stories.length === 0 && <p className="muted">No source stories are available right now.</p>}
             </div>
-            <span className="digest-date">{new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
-          </div>
-          <div className="digest-techs">
-            {(digest?.technologies || []).slice(0, 4).map((technology) => (
-              <Link key={technology.name} to={`/technology/${encodeURIComponent(technology.name)}`}>
-                <span>{technology.name}</span><strong>{Math.round(technology.score)}</strong>
-              </Link>
-            ))}
-          </div>
-          <div className="digest-stories">
-            {(digest?.stories || []).slice(0, 3).map((item) => (
-              <a key={item.url} href={item.url} target="_blank" rel="noreferrer" className="digest-story">
-                <span className="badge">{item.source}</span>
-                <strong>{item.title}</strong>
-                <span className="muted">{Math.round(item.score)} ecosystem points</span>
-              </a>
-            ))}
-            {digest && digest.stories.length === 0 && <p className="muted">No source stories are available right now.</p>}
-          </div>
-        </section>
+          </section>
+
+        </aside>
       </div>
 
       <div className="feed-layout">
@@ -292,9 +297,7 @@ export default function Dashboard() {
             </ol>
             {rankingsLoading && <p className="muted ranking-status">Updating rankings…</p>}
             {!rankingsLoading && periodRankings.length === 0 && (
-              <p className="muted ranking-status">
-                "No current rankings are available."
-              </p>
+              <p className="muted ranking-status">No current rankings are available.</p>
             )}
           </section>
         </aside>

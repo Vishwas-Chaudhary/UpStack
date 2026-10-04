@@ -2223,7 +2223,7 @@ html[data-theme="positivus"] .workspace-nav a.active {
   color: #191a23;
 }
 html[data-theme="positivus"] .workspace-actions { flex: none; gap: 0.65rem; }
-html[data-theme="positivus"] .workspace-actions .help-chat { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 40; }
+html[data-theme="positivus"] .workspace-actions .help-chat { position: relative; right: auto; bottom: auto; z-index: 20; }
 html[data-theme="positivus"] .workspace-user { display: inline-flex; text-decoration: none; }
 html[data-theme="positivus"] .workspace-user .avatar {
   width: 38px;
@@ -2432,6 +2432,10 @@ html[data-theme="positivus"] .pill {
   background: #fff;
   color: #191a23;
 }
+html[data-theme="positivus"] .dashboard-filter-row .pill {
+  padding: 0.48rem 1.05rem;
+  font-size: 0.86rem;
+}
 html[data-theme="positivus"] .pill.active { background: #b9ff66; color: #191a23; }
 html[data-theme="positivus"] input[type="text"],
 html[data-theme="positivus"] input[type="email"],
@@ -2495,12 +2499,55 @@ html[data-theme="positivus"] .auth-card .auth-submit { width: 100%; justify-cont
 html[data-theme="positivus"] .auth-card .error { color: #b42318; }
 html[data-theme="positivus"] .auth-card a { color: #191a23; font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
+html[data-theme="positivus"] .topbar-help-chat {
+  position: relative;
+  align-items: flex-end;
+  z-index: 20;
+}
+html[data-theme="positivus"] .topbar-help-chat .chat-launcher {
+  min-height: 40px;
+}
+html[data-theme="positivus"] .topbar-help-chat .chat-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.7rem);
+  width: min(370px, calc(100vw - 2rem));
+  height: min(520px, calc(100vh - 10rem));
+  max-height: min(520px, calc(100dvh - 10rem));
+  z-index: 30;
+}
+html[data-theme="positivus"] .dashboard-filter-row {
+  margin: 2.25rem 0 1rem;
+}
+html[data-theme="positivus"] .dashboard-filter-row > .filters {
+  min-width: 0;
+  margin: 0;
+}
+html[data-theme="positivus"] .dashboard-side-column { min-width: 0; }
+html[data-theme="positivus"] .dashboard-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+html[data-theme="positivus"] .dashboard-side-column .panel { width: 100%; margin: 0; }
+html[data-theme="positivus"] .dashboard-side-column > .digest-panel { margin-top: 0.63rem; }
+html[data-theme="positivus"] .dashboard-feature-layout {
+  grid-template-columns: minmax(0, 2.2fr) minmax(280px, 0.85fr);
+  gap: 1.25rem;
+  margin-top: 1.7rem;
+}
+html[data-theme="positivus"] .spotlight-section .spotlight-heading { margin: 0 0 0.75rem; }
+html[data-theme="positivus"] .spotlight-section .spotlight-card { min-height: 180px; padding: 0.85rem; }
+html[data-theme="positivus"] .feed-layout { margin-top: 0.3rem; }
+html[data-theme="positivus"] .feed-layout > .trending-rail { margin-top: 2.5rem; }
+
 @media (max-width: 900px) {
   html[data-theme="positivus"] .topbar-inner { flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; }
   html[data-theme="positivus"] .workspace-nav { order: 3; flex-basis: 100%; justify-content: flex-start; overflow-x: auto; }
   html[data-theme="positivus"] .topbar-right { margin-left: auto; }
   html[data-theme="positivus"] .dashboard-top-grid { grid-template-columns: 1fr; }
   html[data-theme="positivus"] .feed-layout { grid-template-columns: minmax(0, 1fr) 270px; }
+  html[data-theme="positivus"] .dashboard-feature-layout { grid-template-columns: minmax(0, 1.8fr) minmax(250px, 0.9fr); gap: 0.85rem; }
 }
 @media (max-width: 680px) {
   html[data-theme="positivus"] .topbar-inner { padding: 0.65rem 1rem; }
@@ -2510,11 +2557,14 @@ html[data-theme="positivus"] .auth-card a { color: #191a23; font-weight: 700; te
   html[data-theme="positivus"] .workspace-actions .btn kbd { display: none; }
   html[data-theme="positivus"] .page { padding: 1.25rem 1rem 4rem; }
   html[data-theme="positivus"] .feed-layout { grid-template-columns: 1fr; }
+  html[data-theme="positivus"] .dashboard-feature-layout { grid-template-columns: 1fr; }
+  html[data-theme="positivus"] .topbar-help-chat .chat-launcher { min-height: 36px; padding: 0.45rem 0.55rem; }
   html[data-theme="positivus"] .dashboard-hero { align-items: flex-start; flex-direction: column; }
   html[data-theme="positivus"] .dashboard-top-grid .dashboard-hero { min-height: 0; }
   html[data-theme="positivus"] .dashboard-top-grid .hero-stat { margin-top: 0; }
   html[data-theme="positivus"] .spotlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   html[data-theme="positivus"] .section-head { align-items: flex-start; flex-direction: column; }
+  html[data-theme="positivus"] .trending-rail { display: flex; }
 }
 @media (max-width: 420px) {
   html[data-theme="positivus"] .brand { font-size: 1.2rem; }
