@@ -2267,9 +2267,11 @@ html[data-theme="positivus"] .dashboard-top-grid {
 }
 html[data-theme="positivus"] .dashboard-top-grid .dashboard-hero {
   min-height: 310px;
-  padding: clamp(1.5rem, 4vw, 3rem);
+  align-items: flex-start;
+  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.5rem, 3vw, 3rem);
   background: #f3f3f3;
 }
+html[data-theme="positivus"] .dashboard-top-grid .hero-stat { margin-top: 1rem; }
 html[data-theme="positivus"] .dashboard-hero h1 { max-width: 540px; color: #191a23; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.08; }
 html[data-theme="positivus"] .dashboard-hero h1 span {
   position: relative;
@@ -2300,8 +2302,10 @@ html[data-theme="positivus"] .hero-stat-label,
 html[data-theme="positivus"] .hero-stat-foot,
 html[data-theme="positivus"] .hero-updated { color: #191a23; }
 html[data-theme="positivus"] .hero-updated { border-color: rgba(25, 26, 35, 0.25); }
-html[data-theme="positivus"] .dashboard-top-grid .top-live-chart { margin: 0; }
-html[data-theme="positivus"] .card.panel { padding: 1.35rem; }
+html[data-theme="positivus"] .dashboard-top-grid .top-live-chart { margin: 0; padding-top: 0.9rem; }
+html[data-theme="positivus"] .card.panel { padding: 0.9rem 1.35rem 1.35rem; }
+html[data-theme="positivus"] .digest-panel > .section-head,
+html[data-theme="positivus"] .rail-trending > .section-head { margin-top: 0; }
 html[data-theme="positivus"] .spotlight-grid { gap: 1rem; }
 html[data-theme="positivus"] .spotlight-card {
   min-height: 215px;
@@ -2508,6 +2512,7 @@ html[data-theme="positivus"] .auth-card a { color: #191a23; font-weight: 700; te
   html[data-theme="positivus"] .feed-layout { grid-template-columns: 1fr; }
   html[data-theme="positivus"] .dashboard-hero { align-items: flex-start; flex-direction: column; }
   html[data-theme="positivus"] .dashboard-top-grid .dashboard-hero { min-height: 0; }
+  html[data-theme="positivus"] .dashboard-top-grid .hero-stat { margin-top: 0; }
   html[data-theme="positivus"] .spotlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   html[data-theme="positivus"] .section-head { align-items: flex-start; flex-direction: column; }
 }
