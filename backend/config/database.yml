@@ -1,0 +1,14 @@
+# The database is Supabase (hosted PostgreSQL).
+# Put your connection string in backend/.env as DATABASE_URL; Rails merges it into the settings below.
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  prepared_statements: false   # needed for Supabase's connection poolers
+  advisory_locks: false
+
+development:
+  <<: *default
+
+production:
+  <<: *default

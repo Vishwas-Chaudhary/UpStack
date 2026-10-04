@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+
+gem "rails", "~> 7.2.0"
+gem "pg", "~> 1.5"        # PostgreSQL driver (Supabase is hosted Postgres)
+gem "puma", ">= 5.0"
+gem "bcrypt", "~> 3.1"    # has_secure_password
+gem "nokogiri"            # parses GitHub's trending page
+gem "rack-cors"           # allows the deployed frontend to call the API
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+
+group :development, :test do
+  gem "dotenv-rails"      # loads backend/.env
+end
