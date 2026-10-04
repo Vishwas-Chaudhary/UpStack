@@ -5,6 +5,8 @@ import App from "./App.jsx";
 import { AuthProvider } from "./auth.jsx";
 import "./styles.css";
 
+document.documentElement.dataset.theme = "positivus";
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthProvider>
