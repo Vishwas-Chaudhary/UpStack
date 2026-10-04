@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth.jsx";
+import useTheme from "../useTheme.js";
 
 export default function Auth({ mode }) {
   const isRegister = mode === "register";
   const { user, login, register } = useAuth();
+  const [theme, setTheme] = useTheme();
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
@@ -31,6 +33,17 @@ export default function Auth({ mode }) {
 
   return (
     <div className="auth-wrap">
+      <button
+        type="button"
+        className="btn btn-outline theme-toggle auth-theme-toggle"
+        onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")}
+        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+        aria-pressed={theme === "light"}
+        title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+      >
+        <span aria-hidden="true">{theme === "dark" ? "☼" : "◐"}</span>
+        <span>{theme === "dark" ? "Light" : "Dark"} mode</span>
+      </button>
       <form className="card auth-card" onSubmit={submit}>
         <h1>{isRegister ? "Create your account" : "Welcome back"}</h1>
         <p className="muted">

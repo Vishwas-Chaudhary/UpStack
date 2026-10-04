@@ -1,28 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../auth.jsx";
+import useTheme from "../useTheme.js";
 import CommandPalette from "./CommandPalette.jsx";
 import HelpChat from "./HelpChat.jsx";
 
 export default function Layout() {
   const { user } = useAuth();
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem("upstack-theme") || "dark";
-    } catch {
-      return "dark";
-    }
-  });
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    try {
-      localStorage.setItem("upstack-theme", theme);
-    } catch {
-      // The in-memory selection still works when storage is unavailable.
-    }
-  }, [theme]);
+  const [theme, setTheme] = useTheme();
 
   // Cmd/Ctrl + K opens the command palette
   useEffect(() => {
