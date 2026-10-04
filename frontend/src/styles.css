@@ -2270,8 +2270,14 @@ html[data-theme="positivus"] .dashboard-top-grid .dashboard-hero {
   padding: clamp(1.5rem, 4vw, 3rem);
   background: #f3f3f3;
 }
-html[data-theme="positivus"] .dashboard-hero h1 { max-width: 540px; color: #191a23; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.04; }
-html[data-theme="positivus"] .dashboard-hero h1 span { padding: 0 0.18em; background: #b9ff66; box-decoration-break: clone; color: #191a23; }
+html[data-theme="positivus"] .dashboard-hero h1 { max-width: 540px; color: #191a23; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.12; }
+html[data-theme="positivus"] .dashboard-hero h1 span {
+  display: inline-block;
+  margin-left: -0.08em;
+  padding: 0 0.08em;
+  background: #b9ff66;
+  color: #191a23;
+}
 html[data-theme="positivus"] .dashboard-hero .hero-description { max-width: 440px; color: #595a63; }
 html[data-theme="positivus"] .hero-stat {
   min-width: 155px;
