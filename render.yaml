@@ -14,10 +14,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: FRONTEND_URL
-        fromService:
-          type: web
-          name: upstack-web
-          property: host
+        value: https://upstack-web.onrender.com
 
   - type: web
     name: upstack-web
