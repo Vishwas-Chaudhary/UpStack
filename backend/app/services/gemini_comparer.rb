@@ -21,12 +21,42 @@ module GeminiComparer
 
     owner = match[1]
     repo = match[2].delete_suffix(".git")
-    headers = { "Accept" => "application/vnd.github.raw" }
+    headers = {
+      "Accept" => "application/vnd.github.raw+json",
+      "X-GitHub-Api-Version" => "2022-11-28"
+    }
     headers["Authorization"] = "Bearer #{ENV['GITHUB_TOKEN']}" if ENV["GITHUB_TOKEN"].present?
-    text = Http.get("https://api.github.com/repos/#{owner}/#{repo}/readme", headers: headers)
-    raise Error, "Could not fetch the README for #{owner}/#{repo} (it may not exist, or GitHub's rate limit was hit)." if text.blank?
+    response = Http.request(
+      :get,
+      "https://api.github.com/repos/#{owner}/#{repo}/readme",
+      headers: headers
+    )
+    unless response.is_a?(Net::HTTPSuccess)
+      message = begin
+        JSON.parse(response.body).dig("message")
+      rescue JSON::ParserError
+        nil
+      end
+
+      if response.code == "404"
+        raise Error, "GitHub could not find a README for #{owner}/#{repo}. Check the repository URL and make sure the repository has a README."
+      end
+
+      if %w[403 429].include?(response.code) &&
+          (response.code == "429" || response["X-RateLimit-Remaining"] == "0" || message.to_s.match?(/rate limit/i))
+        raise Error, "GitHub's unauthenticated API limit was reached. Add a GitHub token as GITHUB_TOKEN in the upstack-api Render environment, then redeploy."
+      end
+
+      detail = message.present? ? " GitHub said: #{message.truncate(180)}" : ""
+      raise Error, "GitHub could not fetch the README for #{owner}/#{repo} (HTTP #{response.code}).#{detail}"
+    end
+
+    text = response.body.to_s.dup.force_encoding("UTF-8").scrub
+    raise Error, "GitHub returned an empty README for #{owner}/#{repo}." if text.blank?
 
     { name: "#{owner}/#{repo}", text: text.truncate(limit) }
+  rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, SystemCallError, OpenSSL::SSL::SSLError => e
+    raise Error, "Could not reach GitHub while fetching #{owner}/#{repo}: #{e.message}"
   end
 
   def self.prompt(repos)

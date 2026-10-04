@@ -2247,6 +2247,7 @@ html[data-theme="positivus"] .card {
 html[data-theme="positivus"] .page-head { padding: clamp(1.4rem, 3vw, 2.6rem); }
 html[data-theme="positivus"] .page-head::after { display: none; }
 html[data-theme="positivus"] .page-head p { color: var(--muted); }
+html[data-theme="positivus"] .error { color: #b42318; }
 html[data-theme="positivus"] .section-head {
   margin-top: 2rem;
   padding-bottom: 0.75rem;
@@ -2313,6 +2314,30 @@ html[data-theme="positivus"] .spotlight-foot,
 html[data-theme="positivus"] .spotlight-category,
 html[data-theme="positivus"] .spotlight-rank { color: #595a63; }
 html[data-theme="positivus"] .spotlight-card::after { border-color: rgba(25, 26, 35, 0.18); box-shadow: 0 0 0 1rem rgba(25, 26, 35, 0.03), 0 0 0 2rem rgba(25, 26, 35, 0.02); }
+html[data-theme="positivus"] .library-tabs { border-bottom-color: #191a23; }
+html[data-theme="positivus"] .library-tab,
+html[data-theme="positivus"] .library-tab:hover,
+html[data-theme="positivus"] .library-tab.active { color: #191a23; }
+html[data-theme="positivus"] .library-tab { font-weight: 600; }
+html[data-theme="positivus"] .library-tab.active {
+  border-bottom-color: #191a23;
+  background: #b9ff66;
+}
+html[data-theme="positivus"] .library-tab span {
+  background: #191a23;
+  color: #fff;
+}
+html[data-theme="positivus"] .notes-list-head,
+html[data-theme="positivus"] .note-list-item,
+html[data-theme="positivus"] .note-list-item strong { color: #191a23; }
+html[data-theme="positivus"] .note-list-item span,
+html[data-theme="positivus"] .note-list-item small { color: #595a63; }
+html[data-theme="positivus"] .note-list-item:hover { background: #f3f3f3; }
+html[data-theme="positivus"] .note-list-item.active {
+  border-color: #191a23;
+  background: #efffdc;
+  box-shadow: 0 2px 0 #191a23;
+}
 html[data-theme="positivus"] .digest-techs a,
 html[data-theme="positivus"] .digest-date,
 html[data-theme="positivus"] .badge,
