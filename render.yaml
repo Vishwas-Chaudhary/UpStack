@@ -27,10 +27,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: upstack-api
-          property: host
+        value: https://upstack-api.onrender.com
     routes:
       - type: rewrite
         source: /*
